@@ -10,3 +10,7 @@ export type RegisterForm = Pick<User, 'handle' | 'name' | 'email'> & {// Pick es
     password: string
     password_confirmation: string
 }
+
+export type LoginForm = Pick<User, 'email'> & {
+    password : string
+}

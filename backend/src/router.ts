@@ -18,8 +18,8 @@ router.post('/auth/register',
         .isEmail()
         .withMessage('E-mail no válido'),
     body('password')
-        .isLength({ min: 8 })
-        .withMessage('El Password es muy corto, mínimo 8 caracteres'),
+        .isLength({ min: 6 })
+        .withMessage('El Password es muy corto, mínimo 6 caracteres'),
     handleInputErrors,
     createAccount
 )

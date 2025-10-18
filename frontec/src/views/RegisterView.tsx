@@ -1,11 +1,14 @@
 // componente para cambiar de url o de vista, NavLink resalta la url actual y Link no lo hace
 import { Link, NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";// useForm es para manejar el formulario en react. validacion de formularios frontend
-import axios, {isAxiosError} from "axios"; //se usa para hacer peticiones http get, post, deletet, put
-import ErrorMessage from "../components/ErrorMessage";
+import {isAxiosError} from "axios"; //se usa para hacer peticiones http get, post, deletet, put
+import { toast } from "sonner"; // se uar para mostrar mensajes de alerta
+import ErrorMessage from "../components/ErrorMessage"; // se usa para mostrar errores
 import type { RegisterForm } from "../types";
+import api from "../config/axios";
 
 export default function RegisterView() {
+
     const initial_values : RegisterForm = { // se asigna un valor inicial al formulario de string vacio
         name: "",
         email: "",
@@ -15,7 +18,7 @@ export default function RegisterView() {
     }
 
 
-    const { register, watch, handleSubmit,formState: {errors} } = useForm({defaultValues: initial_values}); // useform se asigna como default initial_values para que typescript infiera que los errores son string
+    const { register, watch, reset, handleSubmit,formState: {errors} } = useForm({defaultValues: initial_values}); // useform se asigna como default initial_values para que typescript infiera que los errores son string
     const contraseña = watch ('password')
 
     console.log
@@ -23,11 +26,13 @@ export default function RegisterView() {
     const handle_Register = async (formData : RegisterForm) => {
 
       try {
-        const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, formData ) // el backend y frontend tiene domino independiente
-        console.log(data)
+        const {data} = await api.post("/auth/register", formData ) // el backend y frontend tiene domino independiente
+        // reset()
+
+        toast.success(data) // toast se usa para mostrar mensajes de alerta
       } catch (error) {
         if(isAxiosError(error) && error.response){
-          console.log(error.response.data)
+          toast.error(error.response.data.error)
         }
       }
       // console.log(formData)
@@ -54,7 +59,8 @@ export default function RegisterView() {
                       placeholder="Tu Nombre"
                       className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
 
-                      {...register("name", {
+                      {...register("name", { 
+                        //validaciones
                         required: "Tu nombre es requerido",
                         minLength: {
                           value: 3,
@@ -73,6 +79,7 @@ export default function RegisterView() {
                       placeholder="Email de Registro"
                       className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                       {...register("email", {
+                        //validaciones
                         required: "Tu email es requerido",
                         pattern: { // pattern es para validar el email
                             value: /\S+@\S+\.\S+/,
@@ -90,10 +97,12 @@ export default function RegisterView() {
                       placeholder="Nombre de usuario: sin espacios"
                       className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                       {...register("handle", {
+                        //validaciones
                         required: "Tu handle es requerido",
                       })}
                   />
                   {errors.handle && <ErrorMessage>{errors.handle.message}</ErrorMessage>}
+                  
               </div>
               <div className="grid grid-cols-1 space-y-3">
                   <label htmlFor="password" className="text-2xl text-slate-500">Password</label>
@@ -102,7 +111,8 @@ export default function RegisterView() {
                       type="password"
                       placeholder="Password de Registro"
                       className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
-                      {...register("password", {
+                      // validaciones
+                      {...register("password", { 
                         required: "Tu password es requerido",
                         minLength: {
                           value: 6,
@@ -120,6 +130,7 @@ export default function RegisterView() {
                       type="password"
                       placeholder="Repetir Password"
                       className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
+                      // validaciones
                       {...register("password_confirmation", {
                         required: "Confirma tu password",
                         validate: (value) => value === contraseña || 'Las contraseñas no coinciden inutil de la mierda'

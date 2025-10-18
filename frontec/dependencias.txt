@@ -1,0 +1,56 @@
+{
+  // Metadatos del proyecto: Información básica del paquete
+  "name": "frontec",  // El nombre del proyecto/aplicación
+  "description": "Frontend de la aplicacion", // Descripcion del proyecto
+  "description": "Frontend de la aplicacion", // Descripcion del proyecto
+  "private": true,     // Evita la publicación accidental en el registro de npm
+  "version": "0.0.0",  // Versión actual del paquete (versionamiento semántico)
+  "type": "module",    // Habilita el soporte de módulos ES para el proyecto
+
+  // Scripts disponibles: Comandos que se pueden ejecutar vía npm/yarn
+  "scripts": {
+    "dev": "vite",                          // Inicia el servidor de desarrollo usando Vite
+    "build": "tsc -b && vite build",        // Construye el proyecto: compilación TypeScript y construcción con Vite
+    "lint": "eslint .",                     // Ejecuta ESLint para verificar la calidad del código
+    "preview": "vite preview"               // Previsualiza la aplicación construida localmente
+  },
+
+  // Dependencias de producción: Requeridas para que la aplicación funcione
+  "dependencies": {
+    "axios": "^1.12.2",                     // Cliente HTTP para realizar peticiones API
+    "react": "^19.1.1",                     // Librería React para construir componentes UI
+    "react-dom": "^19.1.1",                 // Renderizador DOM de React para web
+    "jsonwebtoken": "^9.0.2",               // Generacion de tokens
+    "react-hook-form": "^7.65.0",           // Librería para gestionar el estado de formularios en React
+    "react-router-dom": "^7.9.4",           // Enrutamiento declarativo para aplicaciones React
+    "sonner": "^2.0.7"                       // Librería de notificaciones toast
+  },
+
+  // Dependencias de desarrollo: Solo necesarias durante el desarrollo
+  "devDependencies": {
+    "@eslint/js": "^9.36.0",                // Configuración JavaScript de ESLint
+    "@tailwindcss/vite": "^4.1.14",         // Plugin de Vite para Tailwind CSS
+    "@types/node": "^24.6.0",               // Definiciones de tipos TypeScript para Node.js
+    "@types/react": "^19.1.16",             // Definiciones de tipos TypeScript para React
+    "@types/react-dom": "^19.1.9",          // Definiciones de tipos TypeScript para React DOM
+     "@types/jsonwebtoken": "^9.0.10",      // Definiciones de tipos TypeScript para jsonwebtoken
+    "@vitejs/plugin-react-swc": "^4.1.0",   // Plugin de Vite para React con SWC (compilación más rápida)
+    "eslint": "^9.36.0",                    // Linter para JavaScript/TypeScript
+    "eslint-plugin-react-hooks": "^5.2.0", // Plugin de ESLint para reglas de hooks de React
+    "eslint-plugin-react-refresh": "^0.4.22", // Habilita React Fast Refresh durante el desarrollo
+    "globals": "^16.4.0",                   // Configuración de variables globales de ESLint
+    "tailwindcss": "^4.1.14",              // Framework CSS utility-first
+    "typescript": "~5.9.3",                // Compilador y servidor de lenguaje TypeScript
+    "typescript-eslint": "^8.45.0",         // Reglas de ESLint específicas para TypeScript
+    "vite": "^7.1.7"                        // Herramienta de construcción rápida y servidor de desarrollo
+  }
+}
+
+
+json web token 
+al iniciar sesion retorna un jwt
+formato compacto y seguro para envio de datos entre el cliente y el servidor como un objeto json, usa un formato de firma digital para garantizar la autenticidad y la integridad de los datos
+
+AUTENTICACION Y AUTORIZACION: cuando se verifica se le concede un token al usuario
+
+se debe pasar la minima Información para el jwt como el ID

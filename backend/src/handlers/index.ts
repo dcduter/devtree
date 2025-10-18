@@ -55,6 +55,11 @@ export const login = async (req: Request, res: Response) => {
         return res.status(401).json({ error: error.message })
     }
 
+    // el usuario esta registrado y el password es correcto
+    // if (isPasswordCorrect){
+    //     return res.status(200).send('Login Correcto')
+    // }
+
     const token = generateJWT({ id: user._id })
 
     res.send(token)
