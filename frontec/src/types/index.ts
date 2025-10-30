@@ -4,6 +4,8 @@ export type User ={// se usa para tipar el usuario
     name: string,
     email: string,
     password: string, 
+    _id: string
+    description: string
 }
 // type para registro
 export type RegisterForm = Pick<User, 'handle' | 'name' | 'email'> & {// Pick es para seleccionar ciertas propiedades de un tipo
@@ -14,3 +16,5 @@ export type RegisterForm = Pick<User, 'handle' | 'name' | 'email'> & {// Pick es
 export type LoginForm = Pick<User, 'email'> & {
     password : string
 }
+
+export type Profile_Form = Pick<User, 'handle' | 'description' >

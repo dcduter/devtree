@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose'
 
-export interface IUser extends Document {
+export interface IUser extends Document { // hereda todos los atributos de Document
     handle: string
     name: string
     email: string

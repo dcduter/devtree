@@ -37,8 +37,8 @@ router.post('/auth/login',
 
 router.get('/user', authenticate, getUser)
 
-router.patch('/user',
-    body('handle')
+router.patch('/user', // patch permite un modificaion parcial en la base de datos, se requier que esta autenticado
+    body('handle') // validaciones
         .notEmpty()
         .withMessage('El handle no puede ir vacio'),
     handleInputErrors,
